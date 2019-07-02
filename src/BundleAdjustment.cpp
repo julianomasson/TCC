@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "BundleAdjustment.h"
 
 BundleAdjustment::BundleAdjustment()

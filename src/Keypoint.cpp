@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "Keypoint.h"
 
 Keypoint::Keypoint(cv::KeyPoint keypoint, Camera * cam)
