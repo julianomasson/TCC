@@ -4,11 +4,11 @@ BundleAdjustment::BundleAdjustment()
 {
 }
 
-bool RemoveInvisiblePoints(vector<CameraT>& camera_data, vector<Point3D>& point_data,
-  vector<int>& ptidx, vector<int>& camidx,
-  vector<Point2D>& measurements, vector<std::string>& names, vector<int>& ptc)
+bool RemoveInvisiblePoints(std::vector<CameraT>& camera_data, std::vector<Point3D>& point_data,
+	std::vector<int>& ptidx, std::vector<int>& camidx,
+	std::vector<Point2D>& measurements, std::vector<std::string>& names, std::vector<int>& ptc)
 {
-  vector<float> zz(ptidx.size());
+	std::vector<float> zz(ptidx.size());
   for (size_t i = 0; i < ptidx.size(); ++i)
   {
     CameraT& cam = camera_data[camidx[i]];
@@ -20,7 +20,7 @@ bool RemoveInvisiblePoints(vector<CameraT>& camera_data, vector<Point3D>& point_
   float dist_threshold = zz[median_idx] * 0.001f;
 
   //keep removing 3D points. until all of them are infront of the cameras..
-  vector<bool> pmask(point_data.size(), true);
+  std::vector<bool> pmask(point_data.size(), true);
   int points_removed = 0;
   for (size_t i = 0; i < ptidx.size(); ++i)
   {

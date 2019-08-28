@@ -389,6 +389,7 @@ void Pair::computeDenseDAISY()
   newH1 = newH1.inv();
   newH2 = newH2.inv();
 
+  for (size_t i = 0; i < ptsTrans1.size(); i++)
   {
     keypoints1.push_back(cv::KeyPoint(ptsTrans1.at(i), keypoint_diameter));
     keypoints2.push_back(cv::KeyPoint(ptsTrans2.at(i), keypoint_diameter));

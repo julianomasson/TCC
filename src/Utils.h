@@ -99,9 +99,9 @@ public:
   static void transformPoint(double* point, cv::Matx34f matrixRT)
   {
     vtkSmartPointer<vtkMatrix4x4> matrixRT4x4 = vtkSmartPointer<vtkMatrix4x4>::New();
-    for (size_t i = 0; i < 3; i++)
+    for (unsigned int i = 0; i < 3; i++)
     {
-      for (size_t j = 0; j < 4; j++)
+      for (unsigned int j = 0; j < 4; j++)
       {
         matrixRT4x4->SetElement(i,j, matrixRT(i, j));
 
@@ -179,9 +179,9 @@ public:
 
   static void getRotationMatrix(cv::Mat &R, cv::Matx34f P)
   {
-    for (size_t i = 0; i < 3; i++)
+    for (unsigned int i = 0; i < 3; i++)
     {
-      for (size_t j = 0; j < 3; j++)
+      for (unsigned int j = 0; j < 3; j++)
       {
         R.at<double>(i,j) = P(i,j);
       }
@@ -190,9 +190,9 @@ public:
 
   static void getRotationMatrix(cv::Mat &R, cv::Mat P)
   {
-    for (size_t i = 0; i < 3; i++)
+    for (unsigned int i = 0; i < 3; i++)
     {
-      for (size_t j = 0; j < 3; j++)
+      for (unsigned int j = 0; j < 3; j++)
       {
         R.at<double>(i, j) = P.at<double>(i, j);
       }
@@ -201,9 +201,9 @@ public:
 
   static void getRotationMatrix(cv::Mat &R, vtkSmartPointer<vtkMatrix4x4> P)
   {
-    for (size_t i = 0; i < 3; i++)
+    for (unsigned int i = 0; i < 3; i++)
     {
-      for (size_t j = 0; j < 3; j++)
+      for (unsigned int j = 0; j < 3; j++)
       {
         R.at<float>(i, j) = P->GetElement(i, j);
       }
@@ -212,7 +212,7 @@ public:
 
   static void getTranslationVector(cv::Mat &t, cv::Matx34f P)
   {
-    for (size_t i = 0; i < 3; i++)
+    for (unsigned int i = 0; i < 3; i++)
     {
       t.at<double>(i, 0) = P(i, 3);
     }
@@ -220,7 +220,7 @@ public:
 
   static void getTranslationVector(cv::Mat &t, vtkSmartPointer<vtkMatrix4x4> P)
   {
-    for (size_t i = 0; i < 3; i++)
+    for (unsigned int i = 0; i < 3; i++)
     {
       t.at<float>(i, 0) = (float)P->GetElement(i, 3);
     }
@@ -235,9 +235,9 @@ public:
 
   static void printMat(cv::Mat m)
   {
-    for (size_t i = 0; i < m.rows; i++)
+    for (int i = 0; i < m.rows; i++)
     {
-      for (size_t j = 0; j < m.cols; j++)
+      for (int j = 0; j < m.cols; j++)
       {
         std::cout << m.at<double>(i, j) << " ";
       }
@@ -247,9 +247,9 @@ public:
   }
   static void printMat(cv::Matx34f m)
   {
-    for (size_t i = 0; i < m.rows; i++)
+    for (int i = 0; i < m.rows; i++)
     {
-      for (size_t j = 0; j < m.cols; j++)
+      for (int j = 0; j < m.cols; j++)
       {
         std::cout << m(i, j) << " ";
       }
@@ -262,9 +262,9 @@ public:
   {
     std::ofstream myfile;
     myfile.open(path);
-    for (size_t i = 0; i < m.rows; i++)
+    for (int i = 0; i < m.rows; i++)
     {
-      for (size_t j = 0; j < m.cols; j++)
+      for (int j = 0; j < m.cols; j++)
       {
         myfile << m.at<double>(i, j) << " ";
       }
@@ -295,9 +295,9 @@ public:
   static vtkSmartPointer<vtkMatrix4x4> cv2vtkMatrix(cv::Matx34f P)
   {
     vtkSmartPointer<vtkMatrix4x4> mat = vtkSmartPointer<vtkMatrix4x4>::New();
-    for (size_t i = 0; i < 3; i++)
+    for (int i = 0; i < 3; i++)
     {
-      for (size_t j = 0; j < 4; j++)
+      for (int j = 0; j < 4; j++)
       {
         mat->SetElement(i,j, P(i,j));
       }
@@ -317,11 +317,11 @@ public:
     }
     cv::Mat mat = cv::Mat_<double>(mat1.rows, P.cols);
     double sum = 0;
-    for (size_t i = 0; i < mat1.rows; i++)
+    for (int i = 0; i < mat1.rows; i++)
     {
-      for (size_t j = 0; j < P.cols; j++)
+      for (int j = 0; j < P.cols; j++)
       {
-        for (size_t k = 0; k < P.rows; k++)
+        for (int k = 0; k < P.rows; k++)
         {
           sum += mat1.at<double>(i, k)*P(k, j);
         }
@@ -335,14 +335,14 @@ public:
   static cv::Mat createRT(cv::Mat R, cv::Mat t)
   {
     cv::Mat RT = cv::Mat_<double>(3, 4);
-    for (size_t i = 0; i < R.rows; i++)
+    for (int i = 0; i < R.rows; i++)
     {
-      for (size_t j = 0; j < R.cols; j++)
+      for (int j = 0; j < R.cols; j++)
       {
         RT.at<double>(i, j) = R.at<double>(i, j);
       }
     }
-    for (size_t i = 0; i < 3; i++)
+    for (int i = 0; i < 3; i++)
     {
       RT.at<double>(i, 3) = t.at<double>(i, 0);
     }
@@ -351,14 +351,14 @@ public:
   static cv::Matx34f createRT4(cv::Mat R, cv::Mat t)
   {
     cv::Matx34f RT;
-    for (size_t i = 0; i < R.rows; i++)
+    for (int i = 0; i < R.rows; i++)
     {
-      for (size_t j = 0; j < R.cols; j++)
+      for (int j = 0; j < R.cols; j++)
       {
         RT(i, j) = R.at<double>(i, j);
       }
     }
-    for (size_t i = 0; i < 3; i++)
+    for (unsigned int i = 0; i < 3; i++)
     {
       RT(i, 3) = t.at<double>(i, 0) / t.at<double>(3, 0);
     }
@@ -401,9 +401,9 @@ public:
     double normV2 = cv::norm(v2, cv::NORM_L2);
     double normV3 = cv::norm(v3, cv::NORM_L2);
     cv::Mat R = cv::Mat_<double>(3, 3);
-    for (size_t i = 0; i < R.rows; i++)
+    for (int i = 0; i < R.rows; i++)
     {
-      for (size_t j = 0; j < R.cols; j++)
+      for (int j = 0; j < R.cols; j++)
       {
         if (i == 0)
         {
@@ -718,10 +718,10 @@ public:
   {
     double mean1 = 0;
     double mean2 = 0;
-    double windowSize = img1.rows;
-    for (int k = 0; k < windowSize; k++)
+	unsigned int windowSize = img1.rows;
+    for (unsigned int k = 0; k < windowSize; k++)
     {
-      for (int j = 0; j < windowSize; j++)
+      for (unsigned int j = 0; j < windowSize; j++)
       {
         mean1 += img1.at<uchar>(k, j);
         mean2 += img2.at<uchar>(k, j);
@@ -738,9 +738,9 @@ public:
     double sumSq2 = 0;
     double res1;
     double res2;
-    for (size_t k = 0; k < windowSize; k++)
+    for (unsigned int k = 0; k < windowSize; k++)
     {
-      for (size_t j = 0; j < windowSize; j++)
+      for (unsigned int j = 0; j < windowSize; j++)
       {
         res1 = img1.at<uchar>(k, j) - mean1;
         res2 = img2.at<uchar>(k, j) - mean2;
@@ -778,13 +778,13 @@ public:
     {
       xEnd = image.cols - 1 - windowSize;
     }
-    int windowSize2 = windowSize * 2 + 1;
+	unsigned int windowSize2 = windowSize * 2 + 1;
     double res1;
     double res2;
     v = y - windowSize;
-    for (int k = 0; k < windowSize2; k++)
+    for (unsigned int k = 0; k < windowSize2; k++)
     {
-      for (int j = 0; j < windowSize2; j++)
+      for (unsigned int j = 0; j < windowSize2; j++)
       {
         med2 += temp.at<uchar>(k, j);
       }
@@ -797,9 +797,9 @@ public:
     for (int x = xStart; x <= xEnd; x++)
     {
       u = x - windowSize;
-      for (size_t k = 0; k < windowSize2; k++)
+      for (unsigned int k = 0; k < windowSize2; k++)
       {
-        for (size_t j = 0; j < windowSize2; j++)
+        for (unsigned int j = 0; j < windowSize2; j++)
         {
           med1 += image.at<uchar>(v + k, u + j);
         }
@@ -807,9 +807,9 @@ public:
       med1 = med1 / (windowSize2*windowSize2);
       if (med1 < 240 && med1 > 15)
       {
-        for (size_t k = 0; k < windowSize2; k++)
+        for (unsigned int k = 0; k < windowSize2; k++)
         {
-          for (size_t j = 0; j < windowSize2; j++)
+          for (unsigned int j = 0; j < windowSize2; j++)
           {
             res1 = image.at<uchar>(v + k, u + j) - med1;
             res2 = temp.at<uchar>(k, j) - med2;
@@ -881,12 +881,12 @@ public:
     {
       xEnd = image.cols - 1 - windowSize;
     }
-    int windowSize2 = windowSize * 2 + 1;
+	unsigned int windowSize2 = windowSize * 2 + 1;
     double res1;
     double res2;
-    for (int k = 0; k < windowSize2; k++)
+    for (unsigned int k = 0; k < windowSize2; k++)
     {
-      for (int j = 0; j < windowSize2; j++)
+      for (unsigned int j = 0; j < windowSize2; j++)
       {
         med2 += temp.at<uchar>(k, j);
       }
@@ -904,9 +904,9 @@ public:
         {
           v = y - windowSize;
           u = x - windowSize;
-          for (size_t k = 0; k < windowSize2; k++)
+          for (unsigned int k = 0; k < windowSize2; k++)
           {
-            for (size_t j = 0; j < windowSize2; j++)
+            for (unsigned int j = 0; j < windowSize2; j++)
             {
               med1 += image.at<uchar>(v + k, u + j);
             }
@@ -914,9 +914,9 @@ public:
           med1 = med1 / (windowSize2*windowSize2);
           if (true)//med1 < 240 && med1 > 15)
           {
-            for (size_t k = 0; k < windowSize2; k++)
+            for (unsigned int k = 0; k < windowSize2; k++)
             {
-              for (size_t j = 0; j < windowSize2; j++)
+              for (unsigned int j = 0; j < windowSize2; j++)
               {
                 res1 = image.at<uchar>(v + k, u + j) - med1;
                 res2 = temp.at<uchar>(k, j) - med2;
@@ -957,7 +957,7 @@ public:
         pts.push_back(cv::Point2f(pt2D.x + i, pt2D.y + j));
       }
     }
-    int windowSize2 = pts.size();
+	size_t windowSize2 = pts.size();
     std::vector<cv::Point2f> ptsTransf;
     cv::perspectiveTransform(pts, ptsTransf, H_ij);
     /*int x, y;
@@ -995,10 +995,10 @@ public:
   {
     double med1 = 0;
     double med2 = 0;
-    int windowSize = img1.cols;
-    for (size_t i = 0; i < windowSize; i++)
+	unsigned int windowSize = img1.cols;
+    for (unsigned int i = 0; i < windowSize; i++)
     {
-      for (size_t j = 0; j < windowSize; j++)
+      for (unsigned int j = 0; j < windowSize; j++)
       {
         med1 += img1.at<uchar>(i, j);
         med2 += img2.at<uchar>(i, j);
@@ -1007,9 +1007,9 @@ public:
     med1 /= windowSize*windowSize;
     med2 /= windowSize*windowSize;
     double res1, res2, sum = 0, sumSq1 = 0, sumSq2 = 0;
-    for (size_t i = 0; i < windowSize; i++)
+    for (unsigned int i = 0; i < windowSize; i++)
     {
-      for (size_t j = 0; j < windowSize; j++)
+      for (unsigned int j = 0; j < windowSize; j++)
       {
         res1 = img1.at<uchar>(i, j) - med1;
         res2 = img2.at<uchar>(i, j) - med2;
@@ -1035,11 +1035,11 @@ public:
         int b = (H.at<double>(1, 0)*x + H.at<double>(1, 1)*y + H.at<double>(1, 2)) / (H.at<double>(2, 0)*x + H.at<double>(2, 1)*y + H.at<double>(2, 2));
         if (a >= 0 && a < img.rows && b >= 0 && b < img.cols)
         {
-        newImg.at<uchar>(i, j) = img.at<uchar>(a, b);
+			newImg.at<uchar>(i, j) = img.at<uchar>(a, b);
         }
         else
         {
-        newImg.at<uchar>(i, j) = 0;
+			newImg.at<uchar>(i, j) = 0;
         }
       }
     });

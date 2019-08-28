@@ -4,6 +4,14 @@ project (TCC)
 find_package( OpenCV REQUIRED )
 include_directories( ${OpenCV_INCLUDE_DIRS} )
 
+find_path(SIFTGPU_INCLUDE_DIR SiftGPU)
+find_library(SIFTGPU_LIBRARY_RELEASE SiftGPU)
+include_directories(${SIFTGPU_INCLUDE_DIR})
+
+find_path(PBA_INCLUDE_DIR pba)
+find_library(PBA_LIBRARY_RELEASE pba_x64)
+include_directories(${PBA_INCLUDE_DIR})
+
 add_executable(${PROJECT_NAME} src/main.cpp
 				src/BundleAdjustment.cpp
 				src/BundleAdjustment.h
@@ -24,7 +32,7 @@ add_executable(${PROJECT_NAME} src/main.cpp
 				src/Utils.h)
 
 # Find PCL
-find_package( PCL 1.9 REQUIRED )
+find_package( PCL 1.8 REQUIRED )
  
 if( PCL_FOUND )
   # Additional Include Directories
@@ -47,3 +55,7 @@ endif()
 
 
 target_link_libraries(${PROJECT_NAME} ${OpenCV_LIBS} )
+
+target_link_libraries(${PROJECT_NAME} ${SIFTGPU_LIBRARY_RELEASE})
+
+target_link_libraries(${PROJECT_NAME} ${PBA_LIBRARY_RELEASE})

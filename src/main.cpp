@@ -398,12 +398,12 @@ int main(int argc, const char* argv[])
     std::cout << "path qtdImages showMatch useOpenCV useAKAZE computeDense pathSFMDense[É necessário criar uma pasta Results no diretório do exe]" << std::endl;
     //return 0;
   }
-  std::string pathImages = "C:\\UFSC\\10_Semestre\\TCC2\\SIFT_OpenCV\\SIFT_OpenCV\\gargoyle\\rotated";//argv[1];//"C:\\UFSC\\10_Semestre\\TCC2\\SIFT_OpenCV\\SIFT_OpenCV\\trilho";//
+  std::string pathImages = "D:\\UFSC\\Graduacao\\10_Semestre\\TCC2\\SIFT_OpenCV\\SIFT_OpenCV\\gargoyle\\rotated";//argv[1];//"C:\\UFSC\\10_Semestre\\TCC2\\SIFT_OpenCV\\SIFT_OpenCV\\trilho";//
   int qtdImages = 100;//atoi(argv[2]);//100;
   int showMatch = 0;//atoi(argv[3]);
   bool useOpenCV = true;//atoi(argv[4]); //true;
   bool useAKAZE = false;//atoi(argv[5]); //true;
-  bool computeDense = true;//atoi(argv[6]); //true;
+  bool computeDense = false;//atoi(argv[6]); //true;
   std::string pathDense = "mesh.sfm";//
 
   std::ofstream myfile;
